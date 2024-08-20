@@ -17,7 +17,7 @@ def main():
     opt = parser.parse_args()
     assert os.path.isfile(opt.video)
 
-    steps = 10
+    steps = 11
     video_name = os.path.splitext(os.path.basename(opt.video))[0]
     code_dir = os.path.dirname(os.path.realpath(__file__))
     video_dir = os.path.dirname(os.path.abspath(opt.video))
@@ -158,6 +158,17 @@ def main():
         commands.append(f'python optimize_smpl.py --scene_dir {os.path.join(video_dir, f"{video_name}/output")}')
         commands.append('conda deactivate')
     commands.append(f'cd {code_dir}')
+    
+    # Generate smpl_optimised_aligned_scale.npz 
+    commands.append(f'echo ========================================')
+    commands.append(f'echo 11/{steps}: Generate smpl_optimised_aligned_scale.npz')
+    commands.append(f'echo ========================================')
+    commands.append(f'cd {code_dir}')
+    commands.append(f'python -m images_to_jpg.py {os.path.join(video_dir, f"{video_name}/output/images")} {os.path.join(video_dir, f"{video_name}/output/images_jpg")}')
+    commands.append(f'cd {code_dir}/4D-Humans')
+    # Update /home/user/neuman/preprocess/PHALP/phalp/configs/base.py line enable: bool = True to enable: bool = False # OPENGL Issue
+    commands.append(f'python track.py video.source={os.path.join(video_dir, f"{video_name}/output/images_jpg")}')
+    # Now we have it all saved in 
 
     print(*commands, sep='\n')
     with open("run.sh", "w") as outfile:

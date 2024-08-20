@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  neuman:
+    shm_size: '12gb'
+    build:
+      context: ..
+      dockerfile: ./Dockerfile
+    stdin_open: true
+    tty: true
+    environment:
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility,graphics
+      DISPLAY: $DISPLAY
+    ports:
+      - "7020:7020"
+    volumes:
+      - ../:/home/user/neuman/
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /home/james/.cache/:/home/user/.cache/
+      - /home/james/.ssh/:/home/user/.ssh/
+      - /home/james/data/:/data/
+    working_dir: /home/user/neuman/
+    command: /bin/bash
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
