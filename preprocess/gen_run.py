@@ -40,7 +40,7 @@ def main():
     commands.append(f'echo ========================================')
     commands.append(f'cd {os.path.join(code_dir, "detectron2/demo")}')
     if not os.path.isfile(os.path.join(code_dir, 'detectron2/demo/model_final_2d9806.pkl')):
-        commands.append('wget https://dl.fbaipublicfiles.com/detectron2/COCO-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_3x/139653917/model_final_2d9806.pkl')
+        commands.append('wget -nc https://dl.fbaipublicfiles.com/detectron2/COCO-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_3x/139653917/model_final_2d9806.pkl')
     if not os.path.isdir(os.path.join(video_dir, f'{video_name}/raw_masks')):
         commands.append('conda activate ROMP')
         commands.append(f'python demo.py --config-file ../configs/COCO-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_3x.yaml --input {os.path.join(video_dir, f"{video_name}/raw_720p/*.png")} --output {os.path.join(video_dir, f"{video_name}/raw_masks")}  --opts MODEL.WEIGHTS ./model_final_2d9806.pkl')
@@ -111,9 +111,9 @@ def main():
     if not os.path.exists(os.path.join(code_dir, 'BoostingMonocularDepth/pix2pix/checkpoints/mergemodel')):
         os.makedirs(os.path.join(code_dir, 'BoostingMonocularDepth/pix2pix/checkpoints/mergemodel'))
     if not os.path.isfile(os.path.join(code_dir, 'BoostingMonocularDepth/pix2pix/checkpoints/mergemodel/latest_net_G.pth')):
-        commands.append(f'wget https://sfu.ca/~yagiz/CVPR21/latest_net_G.pth -O {os.path.join(code_dir, "BoostingMonocularDepth/pix2pix/checkpoints/mergemodel/latest_net_G.pth")}')
+        commands.append(f'wget -nc https://sfu.ca/~yagiz/CVPR21/latest_net_G.pth -O {os.path.join(code_dir, "BoostingMonocularDepth/pix2pix/checkpoints/mergemodel/latest_net_G.pth")}')
     if not os.path.isfile(os.path.join(code_dir, 'BoostingMonocularDepth/res101.pth')):
-        commands.append(f'wget https://cloudstor.aarnet.edu.au/plus/s/lTIJF4vrvHCAI31/download -O res101.pth')
+        commands.append(f'wget https://pan.baidu.com/s/1o2oVMiLRu770Fdpa65Pdbw?pwd=g3yi -O res101.pth')
     if not os.path.isdir(os.path.join(video_dir, f'{video_name}/output/mono_depth')):
         commands.append('conda activate ROMP')
         commands.append(f'python run.py --Final --data_dir {os.path.join(video_dir, f"{video_name}/output/images")} --output_dir {os.path.join(video_dir, f"{video_name}/output/mono_depth")} --depthNet 2')
@@ -159,16 +159,16 @@ def main():
         commands.append('conda deactivate')
     commands.append(f'cd {code_dir}')
     
-    # Generate smpl_optimised_aligned_scale.npz 
-    commands.append(f'echo ========================================')
-    commands.append(f'echo 11/{steps}: Generate smpl_optimised_aligned_scale.npz')
-    commands.append(f'echo ========================================')
-    commands.append(f'cd {code_dir}')
-    commands.append(f'python -m images_to_jpg.py {os.path.join(video_dir, f"{video_name}/output/images")} {os.path.join(video_dir, f"{video_name}/output/images_jpg")}')
-    commands.append(f'cd {code_dir}/4D-Humans')
-    # Update /home/user/neuman/preprocess/PHALP/phalp/configs/base.py line enable: bool = True to enable: bool = False # OPENGL Issue
-    commands.append(f'python track.py video.source={os.path.join(video_dir, f"{video_name}/output/images_jpg")}')
-    # Now we have it all saved in 
+    # # Generate smpl_optimised_aligned_scale.npz 
+    # commands.append(f'echo ========================================')
+    # commands.append(f'echo 11/{steps}: Generate smpl_optimised_aligned_scale.npz')
+    # commands.append(f'echo ========================================')
+    # commands.append(f'cd {code_dir}')
+    # commands.append(f'python -m images_to_jpg.py {os.path.join(video_dir, f"{video_name}/output/images")} {os.path.join(video_dir, f"{video_name}/output/images_jpg")}')
+    # commands.append(f'cd {code_dir}/4D-Humans')
+    # # Update /home/user/neuman/preprocess/PHALP/phalp/configs/base.py line enable: bool = True to enable: bool = False # OPENGL Issue
+    # commands.append(f'python track.py video.source={os.path.join(video_dir, f"{video_name}/output/images_jpg")}')
+    # # Now we have it all saved in 
 
     print(*commands, sep='\n')
     with open("run.sh", "w") as outfile:
