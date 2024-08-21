@@ -10,8 +10,8 @@ for DIRECTORY in "${DIRECTORIES[@]}"; do
         # Check if the file contains the deprecated np.int, np.float, or np.bool
         if grep -q -E '\bnp\.int\b|\bnp\.float\b|\bnp\.bool\b' "$FILE"; then
             # Use sed to replace np.int with np.int32, np.float with np.float32, and np.bool with bool
-            sed -i 's/\bnp\.int\b(?!32|64)/np.int32/g' "$FILE"
-            sed -i 's/\bnp\.float\b(?!16|32|64)/np.float32/g' "$FILE"
+            sed -i 's/\bnp\.int\b/np.int32/g' "$FILE"
+            sed -i 's/\bnp\.float\b/np.float32/g' "$FILE"
             sed -i 's/\bnp\.bool\b/bool/g' "$FILE"
             echo "Updated $FILE"
         fi
