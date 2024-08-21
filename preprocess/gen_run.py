@@ -144,7 +144,7 @@ def main():
     commands.append(f'cd {code_dir}')
     if not os.path.isfile(os.path.join(video_dir, f'{video_name}/output/alignments.npy')):
         commands.append('conda activate neuman_env')
-        commands.append(f'python export_alignment.py --scene_dir {os.path.join(video_dir, f"{video_name}/output/sparse")} --images_dir {os.path.join(video_dir, f"{video_name}/output/images")} --raw_smpl {os.path.join(video_dir, f"{video_name}/output/smpl_pred")} --smpl_estimator="romp"')
+        commands.append(f'python export_alignment_update.py --scene_dir {os.path.join(video_dir, f"{video_name}/output/sparse")} --images_dir {os.path.join(video_dir, f"{video_name}/output/images")} --raw_smpl {os.path.join(video_dir, f"{video_name}/output/smpl_pred")} --smpl_estimator="romp"')
         commands.append('conda deactivate')
     commands.append(f'cd {code_dir}')
 

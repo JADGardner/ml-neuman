@@ -18,7 +18,8 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /home/james/.cache/:/home/user/.cache/
       - /home/james/.ssh/:/home/user/.ssh/
-      - /home/james/data/:/data/
+      - /home/james/data/:home/user/neuman/data/
+      - /home/james/data/:
     working_dir: /home/user/neuman/
     command: /bin/bash
     deploy:
