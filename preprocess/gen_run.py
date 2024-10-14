@@ -111,7 +111,7 @@ def main():
     if not os.path.exists(os.path.join(code_dir, 'BoostingMonocularDepth/pix2pix/checkpoints/mergemodel')):
         os.makedirs(os.path.join(code_dir, 'BoostingMonocularDepth/pix2pix/checkpoints/mergemodel'))
     if not os.path.isfile(os.path.join(code_dir, 'BoostingMonocularDepth/pix2pix/checkpoints/mergemodel/latest_net_G.pth')):
-        commands.append(f'wget https://www.dropbox.com/scl/fi/219n6n8zq1t4hv2l8dfmv/latest_net_G.pth -O {os.path.join(code_dir, "BoostingMonocularDepth/pix2pix/checkpoints/mergemodel/latest_net_G.pth")}')
+        commands.append(f'wget "https://www.dropbox.com/scl/fi/oxawlftn8dyqqn0jy1cpg/latest_net_G.pth?rlkey=ax82rbs8gh0nl2djco6g4qm1l&st=982yizrb&dl=1" -O {os.path.join(code_dir, "BoostingMonocularDepth/pix2pix/checkpoints/mergemodel/latest_net_G.pth")}')
     if not os.path.isfile(os.path.join(code_dir, 'BoostingMonocularDepth/res101.pth')):
         commands.append(f'wget -nc https://huggingface.co/lllyasviel/Annotators/resolve/850be791e8f704b2fa2e55ec9cc33a6ae3e28832/res101.pth')
     if not os.path.isdir(os.path.join(video_dir, f'{video_name}/output/mono_depth')):
