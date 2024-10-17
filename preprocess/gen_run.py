@@ -31,7 +31,7 @@ def main():
     commands.append(f'echo ========================================')
     if not os.path.isdir(os.path.join(video_dir, f'{video_name}/raw_720p')):
         commands.append('conda activate ROMP')
-        commands.append(f'python save_video_frames.py --video {opt.video} --save_to {os.path.join(video_dir, video_name, "raw_720p")}  --width 1280 --height 720 --every 10 --skip=0')
+        commands.append(f'python save_video_frames.py --video {opt.video} --save_to {os.path.join(video_dir, video_name, "raw_720p")}  --width 1280 --height 720 --every 2 --skip=0')
         commands.append('conda deactivate')
 
     # Generate masks

@@ -187,7 +187,7 @@ def main(opt):
 
     # solve the alignment
     alignments = {}
-    additonal_info = {}
+    additional_info = {}
     for i, cap in tqdm(enumerate(scene.captures), total=len(scene.captures)):
         pts_3d = raw_smpl['joints3d'][i]
         pts_2d = raw_smpl['joints2d_img_coord'][i]
@@ -210,13 +210,13 @@ def main(opt):
             smpl_cap
         )
         alignments[os.path.basename(cap.image_path)] = transf
-        additonal_info[os.path.basename(cap.image_path)] = {'rotation': rotation, 'scale': scale}  
+        additional_info[os.path.basename(cap.image_path)] = {'rotation': rotation, 'scale': scale}  
     save_path = os.path.abspath(os.path.join(opt.scene_dir, '../alignments.npy'))
     np.save(save_path, alignments)
     print(f'alignment matrix saved at: {save_path}')
-    save_path = os.path.abspath(os.path.join(opt.scene_dir, '../additonal_info.npy'))
-    np.save(save_path, additonal_info)
-    print(f'additonal_info saved at: {save_path}')
+    save_path = os.path.abspath(os.path.join(opt.scene_dir, '../additional_info.npy'))
+    np.save(save_path, additional_info)
+    print(f'additional_info saved at: {save_path}')
 
 
 if __name__ == '__main__':
